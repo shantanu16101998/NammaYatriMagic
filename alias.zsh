@@ -1,3 +1,6 @@
+# copy paste in your zshrc file 
+# change juspay to your username
+
 alias cba='cabal build all'
 alias cc='cabal clean'
 alias cdh='cd ~'
