@@ -1,1 +1,2 @@
-# shortcuts
+# Namma Yatri Magic
+
