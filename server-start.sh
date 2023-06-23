@@ -11,7 +11,6 @@ banner()
 banner "Starting the server"
 sleep 3
 
-# cd /Users/juspay/nammayatri/Backend
 set +x
 nix run .#arion -- down --remove-orphans
 nix run .#arion -- up --remove-orphans -d
