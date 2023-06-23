@@ -1,1 +1,1 @@
-# NammaYatriMagic
+# shortcuts

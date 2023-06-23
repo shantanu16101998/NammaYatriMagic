@@ -1,0 +1,1635 @@
+{
+	"info": {
+		"_postman_id": "66267cb6-6453-46e5-a85a-00f9185c2e00",
+		"name": "NammaYatri | Ride Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24792004"
+	},
+	"item": [
+		{
+			"name": "BookingAndStartFlow",
+			"item": [
+				{
+					"name": "LoginAndSetDriverLocation",
+					"item": [
+						{
+							"name": "/v2/auth",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.variables.set(\"driver-number\", \"6666666666\");//data.driver.number);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"driver_authId\", jsonData.authId);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"mobileNumber\": \"{{driver-number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"favorit0-0000-0000-0000-00000favorit\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8016/ui/auth",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/v2/auth/:authId/verify",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"driver_token\", jsonData.token);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"connection": true,
+									"accept-encoding": true,
+									"accept": true,
+									"user-agent": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=utf-8",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json;charset=utf-8",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"otp\": \"7891\",\n    \"deviceToken\": \"8e83b5dc-99a0-4306-b90d-2345f3050972\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8016/ui/auth/:authId/verify",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"auth",
+										":authId",
+										"verify"
+									],
+									"variable": [
+										{
+											"key": "authId",
+											"value": "{{driver_authId}}",
+											"description": "(Requir"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/driver/enable",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{driver_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json;charset=utf-8"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8016/ui/driver/setActivity?active=true",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"driver",
+										"setActivity"
+									],
+									"query": [
+										{
+											"key": "active",
+											"value": "true",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/driver/setActivity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{driver_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json;charset=utf-8"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8016/ui/driver/setActivity?active=true",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"driver",
+										"setActivity"
+									],
+									"query": [
+										{
+											"key": "active",
+											"value": "true",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/v2/driver/location",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var moment = require('moment');",
+											"",
+											"var olat = 12.846907",
+											"var ol = 77.556936",
+											"pm.globals.set(\"current_time\",moment.utc().format(\"YYYY-MM-DDTHH:mm:ssZ\"))//moment.utc().format(\"YYYY-MM-DDTHH:mm:ssZ\"));",
+											"pm.variables.set(\"driver-lat\", olat.toString());",
+											"pm.variables.set(\"driver-lon\", ol.toString());"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{driver_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=utf-8"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json;charset=utf-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"pt\": {\n            \"lat\": {{driver-lat}},\n            \"lon\": {{driver-lon}}\n        },\n        \"ts\": \"{{current_time}}\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8016/ui/driver/location",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"driver",
+										"location"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/profile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{driver_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8016/ui/driver/profile",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"driver",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "LoginCustomerAndSelectEstimate",
+					"item": [
+						{
+							"name": "auth",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											" pm.variables.set(\"customer-number\", \"1987654330\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"customer_authId\", jsonData.authId);",
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=utf-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"mobileNumber\": \"{{customer-number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\" : \"YATRI\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8013/v2/auth",
+									"host": [
+										"http://localhost:8013/v2"
+									],
+									"path": [
+										"auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "auth/:authId/verify",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"customer_token\", jsonData.token);",
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=utf-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"otp\": \"7891\",\n    \"deviceToken\": \"5497873d-10ca-42f3-8a32-22de4c916026\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8013/v2/auth/:authId/verify",
+									"host": [
+										"http://localhost:8013/v2"
+									],
+									"path": [
+										"auth",
+										":authId",
+										"verify"
+									],
+									"variable": [
+										{
+											"key": "authId",
+											"value": "{{customer_authId}}",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/v2/rideSearch",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.variables.set(\"customer-origin-lat\", \"12.846907\");",
+											"pm.variables.set(\"customer-origin-lon\", \"77.556936\");",
+											"pm.variables.set(\"customer-destination-lat\", \"12.846907\");",
+											"pm.variables.set(\"customer-destination-lon\", \"77.566936\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"customer_searchId\", body.searchId);",
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{customer_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=utf-8"
+									},
+									{
+										"key": "token",
+										"value": "{{app-reg-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"fareProductType\": \"ONE_WAY\",\n    \"contents\": {\n        \"origin\": {\n            \"address\": {\n                \"area\": \"8th Block Koramangala\",\n                \"areaCode\": \"560047\",\n                \"building\": \"Juspay Buildings\",\n                \"city\": \"Bangalore\",\n                \"country\": \"India\",\n                \"door\": \"#444\",\n                \"street\": \"18th Main\",\n                \"state\": \"Karnataka\"\n            },\n            \"gps\": {\n                \"lat\": {{customer-origin-lat}},\n                \"lon\": {{customer-origin-lon}}\n            }\n        },\n        \"destination\": {\n            \"address\": {\n                \"area\": \"6th Block Koramangala\",\n                \"areaCode\": \"560047\",\n                \"building\": \"Juspay Apartments\",\n                \"city\": \"Bangalore\",\n                \"country\": \"India\",\n                \"door\": \"#444\",\n                \"street\": \"18th Main\",\n                \"state\": \"Karnataka\"\n            },\n            \"gps\": {\n                \"lat\": {{customer-destination-lat}},\n                \"lon\": {{customer-destination-lon}}\n            }\n        }\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8013/v2/rideSearch",
+									"host": [
+										"http://localhost:8013/v2"
+									],
+									"path": [
+										"rideSearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/v2/rideSearch/:searchId/results",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"customer_estimate_id\", body.estimates[0].id);",
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"setTimeout(function(){}, 5000);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{customer_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{app-reg-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8013/v2/rideSearch/:searchId/results",
+									"host": [
+										"http://localhost:8013/v2"
+									],
+									"path": [
+										"rideSearch",
+										":searchId",
+										"results"
+									],
+									"variable": [
+										{
+											"key": "searchId",
+											"value": "{{customer_searchId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/estimate/:estimateId/select2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{customer_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"autoAssignEnabledV2\": false,\n  \"autoAssignEnabled\": false,\n  \"customerExtraFee\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8013/v2/estimate/:estimateId/select2",
+									"host": [
+										"http://localhost:8013/v2"
+									],
+									"path": [
+										"estimate",
+										":estimateId",
+										"select2"
+									],
+									"variable": [
+										{
+											"key": "estimateId",
+											"value": "{{customer_estimate_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DriverOfferQuote",
+					"item": [
+						{
+							"name": "/v2/driver/nearbyRideRequest",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"driver_search_request_id\", body.searchRequestsForDriver[0].searchRequestId);",
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"setTimeout(function(){}, 1000);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{driver_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json;charset=utf-8"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8016/ui/driver/nearbyRideRequest",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"driver",
+										"nearbyRideRequest"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "token",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8013/v2/driver/nearbyRideRequest",
+											"host": [
+												"http://localhost:8013"
+											],
+											"path": [
+												"v2",
+												"driver",
+												"nearbyRideRequest"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"searchRequests\": [\n    {\n      \"searchRequestId\": \"proident qui sunt et\",\n      \"searchRequestValidTill\": \"2016-07-22T00:00:00Z\",\n      \"distanceToPickup\": -8892007021473223000,\n      \"durationToPickup\": 9193992596821537000,\n      \"baseFare\": 37688420.94047874\n    },\n    {\n      \"searchRequestId\": \"laborum Excepteur in amet commodo\",\n      \"searchRequestValidTill\": \"2016-07-22T00:00:00Z\",\n      \"distanceToPickup\": 5409711012229435000,\n      \"durationToPickup\": 8041103522133586000,\n      \"baseFare\": 26816793.720645607\n    }\n  ]\n}"
+								},
+								{
+									"name": "Invalid `token`",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "token",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8013/v2/driver/nearbyRideRequest",
+											"host": [
+												"http://localhost:8013"
+											],
+											"path": [
+												"v2",
+												"driver",
+												"nearbyRideRequest"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "token",
+												"value": "<API Key>"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8013/v2/driver/nearbyRideRequest",
+											"host": [
+												"http://localhost:8013"
+											],
+											"path": [
+												"v2",
+												"driver",
+												"nearbyRideRequest"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/v2/driver/searchRequest/quote/offer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{driver_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=utf-8"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json;charset=utf-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchRequestId\": \"{{driver_search_request_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8016/ui/driver/searchRequest/quote/offer",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"driver",
+										"searchRequest",
+										"quote",
+										"offer"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "token",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchRequestId\": \"Ut consequat ut\",\n  \"offeredFare\": 22215642.991347462\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8013/v2/driver/searchRequest/quote/offer",
+											"host": [
+												"http://localhost:8013"
+											],
+											"path": [
+												"v2",
+												"driver",
+												"searchRequest",
+												"quote",
+												"offer"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "\"Success\""
+								},
+								{
+									"name": "Invalid `body` or `token`",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "token",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchRequestId\": \"Ut consequat ut\",\n  \"offeredFare\": 22215642.991347462\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8013/v2/driver/searchRequest/quote/offer",
+											"host": [
+												"http://localhost:8013"
+											],
+											"path": [
+												"v2",
+												"driver",
+												"searchRequest",
+												"quote",
+												"offer"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "token",
+												"value": "<API Key>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchRequestId\": \"Ut consequat ut\",\n  \"offeredFare\": 22215642.991347462\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8013/v2/driver/searchRequest/quote/offer",
+											"host": [
+												"http://localhost:8013"
+											],
+											"path": [
+												"v2",
+												"driver",
+												"searchRequest",
+												"quote",
+												"offer"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "CusomterAcceptQuote",
+					"item": [
+						{
+							"name": "/estimate/:estimateId/quotes",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"setTimeout(function(){}, 5000);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"customer_quote_id\", body.selectedQuotes[0].id);",
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{customer_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8013/v2/estimate/:estimateId/quotes",
+									"host": [
+										"http://localhost:8013/v2"
+									],
+									"path": [
+										"estimate",
+										":estimateId",
+										"quotes"
+									],
+									"variable": [
+										{
+											"key": "estimateId",
+											"value": "{{customer_estimate_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/v2/rideSearch/quotes/:quoteId/confirm Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"customer_bookingId\", body.bookingId);",
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{customer_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{app-reg-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8013/v2/rideSearch/quotes/:quoteId/confirm",
+									"host": [
+										"http://localhost:8013/v2"
+									],
+									"path": [
+										"rideSearch",
+										"quotes",
+										":quoteId",
+										"confirm"
+									],
+									"variable": [
+										{
+											"key": "quoteId",
+											"value": "{{customer_quote_id}}",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/v2/rideSearch/quotes/:quoteId/confirm",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"customer_bookingId\", body.bookingId);",
+											"console.log(body)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{customer_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{app-reg-token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8013/v2/rideBooking/:bookingId",
+									"host": [
+										"http://localhost:8013/v2"
+									],
+									"path": [
+										"rideBooking",
+										":bookingId"
+									],
+									"variable": [
+										{
+											"key": "bookingId",
+											"value": "{{customer_bookingId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "StartRide",
+					"item": [
+						{
+							"name": "/v2/rideBooking/list",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"setTimeout(function(){}, 2000);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body = JSON.parse(responseBody);",
+											"const bookings = body.list.find ((booking) => booking.status=\"TRIP_ASSIGNED\")",
+											"postman.setEnvironmentVariable(\"ride_otp\", bookings.rideList[0].rideOtp);",
+											"postman.setEnvironmentVariable(\"customer_ride_id\", bookings.rideList[0].id);",
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{customer_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8013/v2/rideBooking/list?limit=20&onlyActive=true",
+									"host": [
+										"http://localhost:8013/v2"
+									],
+									"path": [
+										"rideBooking",
+										"list"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "onlyActive",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/driver/ride/list",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body = JSON.parse(responseBody);",
+											"const rideList = body.list.find ((ride) => ride.status=\"NEW\")",
+											"postman.setEnvironmentVariable(\"driver_ride_id\", rideList.id);",
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{driver_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8016/ui/driver/ride/list?onlyActive=true&limit=10",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"driver",
+										"ride",
+										"list"
+									],
+									"query": [
+										{
+											"key": "offset",
+											"value": "-87769918",
+											"disabled": true
+										},
+										{
+											"key": "onlyActive",
+											"value": "true"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/driver/ride/:rideId/start",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.variables.set(\"ride-start-lat\", \"12.959849\");",
+											"pm.variables.set(\"ride-start-lon\", \"77.611269\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{driver_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=utf-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rideOtp\": \"{{ride_otp}}\",\n    \"point\": {\n        \"lat\": {{ride-start-lat}},\n        \"lon\": {{ride-start-lon}}\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8016/ui/driver/ride/:rideId/start",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"driver",
+										"ride",
+										":rideId",
+										"start"
+									],
+									"variable": [
+										{
+											"key": "rideId",
+											"value": "{{driver_ride_id}}",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "EndRide",
+			"item": [
+				{
+					"name": "/driver/ride/:rideId/end",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.set(\"ride-end-lat\", \"12.94005\");",
+									"pm.variables.set(\"ride-end-lon\", \"77.62264\");",
+									"console.log('If you want to leave the ride open just exit now in 5 seconds')",
+									"setTimeout(function(){}, 5000);"
+
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"console.log(jsonData)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{driver_token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"point\": {\n        \"lat\": {{ride-end-lat}},\n        \"lon\": {{ride-end-lon}}\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8016/ui/driver/ride/:rideId/end",
+							"host": [
+								"http://localhost:8016/ui"
+							],
+							"path": [
+								"driver",
+								"ride",
+								":rideId",
+								"end"
+							],
+							"variable": [
+								{
+									"key": "rideId",
+									"value": "{{driver_ride_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
