@@ -41,6 +41,8 @@ aliases=(
 )
 
 # Append aliases to the .zshrc file
+echo "=== Setting up aliases ==="
 for alias in "${aliases[@]}"; do
-    echo "alias $alias" >> ~/.zshrc
+    echo "[+] set $alias"
+    # echo "alias $alias" >> ~/.zshrc
 done
