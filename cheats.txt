@@ -47,4 +47,5 @@ x86-brew = arch -x86_64 /usr/local/bin/brew
 register = registers the driver with the number
 random-ride = automate the random ride with driver and rider
 replace-driver = replace the driver number in ridebooking json file
+gpoc = git push origin (current branch)
 cheats = shows this menu
