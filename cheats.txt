@@ -1,9 +1,9 @@
-..  =  Go back
-backend  =  Go to backend folder
-build-driver  =  Build the driver app
-build-rider  =  Build the rider app
-cba  =  cabal build all
-cc  =  cabal clean
+.. = Go back
+backend = Go to backend folder
+build-driver = Build the driver app
+build-rider = Build the rider app
+cba = cabal build all
+cc = cabal clean
 cdh = cd ~
 code-backend = code /Users/juspay/nammayatri/Backend
 code-config = code /Users/juspay/nix-config
