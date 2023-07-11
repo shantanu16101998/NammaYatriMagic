@@ -10,7 +10,7 @@
 
 ## Troubleshooting
 
-1. npm -g newman
+1. npm i -g newman
 
 
 

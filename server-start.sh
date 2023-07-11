@@ -15,6 +15,7 @@ set +x
 nix run .#arion -- down --remove-orphans
 nix run .#arion -- up --remove-orphans -d
 nix run .#arion -- up --remove-orphans -d pg-admin
+sh /Users/juspay/.oh-my-zsh/custom/portkill.sh
 echo "Go and sleep for 45 seconds."
 sleep 45
 , run-mobility-stack-dev
