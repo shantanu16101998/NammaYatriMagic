@@ -294,6 +294,15 @@ def request_body_filler(initial_prompt,req_body,api_object,index,data,path):
 
             answer = input("> Wanna add more : ")
 
+    custom_verdict = input("> Want to add custom properties : ")
+
+    while isAffirmative(custom_verdict):
+        key = input("> Enter key : ")
+        value = input("> Enter value : ")
+        body[key] = value
+        print("")
+        custom_verdict = input("> Wanna add more ? ") 
+
     print("")
     print("==> Your request is ")
     print("")

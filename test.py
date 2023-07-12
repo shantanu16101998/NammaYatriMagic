@@ -1,14 +1,14 @@
-from prompt_toolkit import prompt
-from prompt_toolkit.completion import WordCompleter
+import sys
+import time
 
-# List of available commands for autocompletion
-available_commands = ['command1', 'command2', 'command3', 'command4']
+def loading_animation():
+    underscores = '-' * 50  # Number of underscores to display
+    delay = 0.1  # Delay between each frame
+    
+    while True:
+        for i in range(len(underscores)):
+            sys.stdout.write('\r' + 'Loading ' + underscores[:i] + ' ')
+            sys.stdout.flush()
+            time.sleep(delay)
 
-# Create a WordCompleter with the available commands
-completer = WordCompleter(available_commands)
-
-# Main loop for user input
-while True:
-    user_input = prompt('> ', completer=completer)
-    # Process the user input
-    print('Input:', user_input)
+loading_animation()

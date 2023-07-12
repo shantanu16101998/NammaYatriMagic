@@ -47,6 +47,8 @@ def driver_enabler():
     print("[+] Verifying the driver")
     driverId = y.json()["person"]["id"]
     token = admin_token
+
+    a = requests.get(f'http://localhost:8016/ui/auth/logout')
             
     z = requests.post(f'http://localhost:8016/ui/org/driver/{driverId}?enabled=true',headers={'token' : token})
     print("[+] enabling the driver",z.json())

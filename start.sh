@@ -1,3 +1,3 @@
 # change magic root here
-sh /Users/juspay/.oh-my-zsh/custom/portkill.sh
+sh /Users/juspay/NammaYatriMagic/portkill.sh
 , run-mobility-stack-dev
