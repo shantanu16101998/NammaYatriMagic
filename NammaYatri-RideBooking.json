@@ -170,7 +170,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:8016/ui/driver/setActivity?active=true",
+									"raw": "http://localhost:8016/ui/driver/setActivity?active=true&mode=\"ONLINE\"",
 									"host": [
 										"http://localhost:8016/ui"
 									],
@@ -183,6 +183,10 @@
 											"key": "active",
 											"value": "true",
 											"description": "(Required) "
+										},
+										{
+											"key": "mode",
+											"value": "\"ONLINE\""
 										}
 									]
 								}
@@ -232,7 +236,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:8016/ui/driver/setActivity?active=true",
+									"raw": "http://localhost:8016/ui/driver/setActivity?active=true&mode=\"ONLINE\"",
 									"host": [
 										"http://localhost:8016/ui"
 									],
@@ -245,6 +249,10 @@
 											"key": "active",
 											"value": "true",
 											"description": "(Required) "
+										},
+										{
+											"key": "mode",
+											"value": "\"ONLINE\""
 										}
 									]
 								}
