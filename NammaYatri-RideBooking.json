@@ -171,6 +171,7 @@
 								],
 								"url": {
 									"raw": "http://localhost:8016/ui/driver/setActivity?active=true&mode=\"ONLINE\"",
+									"raw": "http://localhost:8016/ui/driver/setActivity?active=true&mode=\"ONLINE\"",
 									"host": [
 										"http://localhost:8016/ui"
 									],
@@ -236,7 +237,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:8016/ui/driver/setActivity?active=true&mode=\"ONLINE\"",
+									"raw": "http://localhost:8016/ui//driver/setActivity?active=true&mode=\"ONLINE\"",
 									"host": [
 										"http://localhost:8016/ui"
 									],
