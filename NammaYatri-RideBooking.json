@@ -261,6 +261,60 @@
 							"response": []
 						},
 						{
+							"name": "/profile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"mId\", jsonData.organization.id);",
+											"postman.setEnvironmentVariable(\"vt\", jsonData.linkedVehicle.variant);",
+											"postman.setEnvironmentVariable(\"dm\", jsonData.mode);",
+											"console.log(jsonData)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{driver_token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8016/ui/driver/profile",
+									"host": [
+										"http://localhost:8016/ui"
+									],
+									"path": [
+										"driver",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "/v2/driver/location",
 							"event": [
 								{
@@ -268,7 +322,6 @@
 									"script": {
 										"exec": [
 											"var moment = require('moment');",
-											"",
 											"var olat = 12.846907",
 											"var ol = 77.556936",
 											"pm.globals.set(\"current_time\",moment.utc().format(\"YYYY-MM-DDTHH:mm:ssZ\"))//moment.utc().format(\"YYYY-MM-DDTHH:mm:ssZ\"));",
@@ -319,6 +372,18 @@
 									{
 										"key": "Accept",
 										"value": "application/json;charset=utf-8"
+									},
+									{
+										"key": "mId",
+										"value": "{{mId}}"
+									},
+									{
+										"key" : "vt",
+										"value": "{{vt}}"
+									},
+									{
+										"key": "dm",
+										"value": "{{dm}}"
 									}
 								],
 								"body": {
@@ -331,64 +396,13 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8016/ui/driver/location",
+									"raw": "http://localhost:8081/ui/driver/location",
 									"host": [
-										"http://localhost:8016/ui"
+										"http://localhost:8081/ui"
 									],
 									"path": [
 										"driver",
 										"location"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "/profile",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = JSON.parse(responseBody);",
-											"console.log(jsonData)"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "apikey",
-									"apikey": [
-										{
-											"key": "value",
-											"value": "{{driver_token}}",
-											"type": "string"
-										},
-										{
-											"key": "key",
-											"value": "token",
-											"type": "string"
-										},
-										{
-											"key": "in",
-											"value": "header",
-											"type": "string"
-										}
-									]
-								},
-								
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8016/ui/driver/profile",
-									"host": [
-										"http://localhost:8016/ui"
-									],
-									"path": [
-										"driver",
-										"profile"
 									]
 								}
 							},
@@ -514,6 +528,7 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
+											"setTimeout(function(){}, 5000);",
 											"pm.variables.set(\"customer-origin-lat\", \"12.846907\");",
 											"pm.variables.set(\"customer-origin-lon\", \"77.556936\");",
 											"pm.variables.set(\"customer-destination-lat\", \"12.846907\");",
